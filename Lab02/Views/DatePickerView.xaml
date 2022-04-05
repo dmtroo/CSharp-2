@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ProgrammingInCSharp.Lab02.Views.DatePickerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tools="clr-namespace:ProgrammingInCSharp.Lab02.Tools.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <tools:DatePickerWithCaption x:Name="DpWithCp" Grid.Column="0" Grid.Row="0" Caption="Your birthdate:" SelectedDate="{Binding Birthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></tools:DatePickerWithCaption>
+        <Button Name="BCalculate" Grid.Column="0" Grid.Row ="1" Margin="25, 5, 25,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Center" Content="Calculate" Command="{Binding CalculateCommand}" ></Button>
+        <tools:TextBlockWithCaption x:Name="TbAge" Grid.Row="2" Grid.Column="0" Caption="Your age:" Margin="2" Text="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBlockWithCaption>
+        <tools:TextBlockWithCaption x:Name="TbWestZ" Grid.Row="3" Grid.Column="0" Caption="Your western zodiac:" Margin="2" Text="{Binding WestZodiac, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBlockWithCaption>
+        <tools:TextBlockWithCaption x:Name="TbChineseZ" Grid.Row="4" Grid.Column="0" Caption="Your chinese zodiac:" Margin="2" Text="{Binding ChineseZodiac, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBlockWithCaption>
+    </Grid>
+</UserControl>
