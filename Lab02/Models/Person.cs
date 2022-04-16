@@ -18,7 +18,7 @@ namespace ProgrammingInCSharp.Lab02.Models
             Birthdate = birthdate;
         }
 
-        public Person(string name = " ", string surname = " ", string email = " ")
+        public Person(string name, string surname, string email)
         {
             Name = name;
             Surname = surname;
