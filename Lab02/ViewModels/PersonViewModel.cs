@@ -88,6 +88,17 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
             }
             private set => OnPropertyChanged("IsBirthday");
         }
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+
+            set
+            {
+                _isEnabled = value;
+                OnPropertyChanged();
+            }
+
+        }
 
         #endregion
 
@@ -95,7 +106,6 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
         {
             get
             {
-
                 return _calculateCommand ??= new RelayCommand<object>(_ => Proceed(), CanExecute);
             }
 
@@ -141,18 +151,6 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
 
             if (_person.IsBirthday)
                 MessageBox.Show($"Happy birthday!!!");
-
-        }
-
-        public bool IsEnabled
-        {
-            get => _isEnabled;
-
-            set
-            {
-                _isEnabled = value;
-                OnPropertyChanged();
-            }
 
         }
 

@@ -86,6 +86,5 @@ namespace ProgrammingInCSharp.Lab02.Models
             var ai = (year - 4) % 12;
             return $"{_elements[ei]} {_animals[ai]}";
         }
-
     }
 }
