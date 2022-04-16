@@ -29,7 +29,6 @@ namespace ProgrammingInCSharp.Lab02.Models
 
         #endregion
 
-
         #region Properties
 
         public string Name { get; set; }
