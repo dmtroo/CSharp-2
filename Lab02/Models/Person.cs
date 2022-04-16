@@ -6,79 +6,47 @@ namespace ProgrammingInCSharp.Lab02.Models
     {
         #region Fields
 
-        private string _name;
-        private string _surname;
-        private string _email;
-        private DateTime? _birthdate;
-        private string[] animals = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
-        private string[] elements = { "Wood", "Fire", "Earth", "Metal", "Water" };
+        private readonly string[] _animals = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
+        private readonly string[] _elements = { "Wood", "Fire", "Earth", "Metal", "Water" };
 
         #endregion
 
         #region Constructors
 
-        public Person(string name, string surname, string email, DateTime? birthdate = null): this(name, surname, email)
-        { 
-            if(birthdate != null) 
-                Birthdate = birthdate.Value;
+        public Person(string name, string surname, string email, DateTime? birthdate): this(name, surname, email)
+        {
+            Birthdate = birthdate;
         }
 
         public Person(string name = " ", string surname = " ", string email = " ")
         {
-            _name = name;
-            _surname = surname;
-            _email = email;
+            Name = name;
+            Surname = surname;
+            Email = email;
         }
 
-        public Person(string name, string surname, DateTime? birthdate)
-        {
-            _name = name;
-            _surname = surname;
-            _birthdate = birthdate;
-        }
+        public Person(string name, string surname, DateTime? birthdate): this(name, surname, "new_email@gmail.com", birthdate) {}
 
         #endregion
 
 
         #region Properties
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
-        public string Surname
-        {
-            get { return _surname; }
-            set { _surname = value; }
-        }
+        public string Surname { get; set; }
 
-        public string Email
-        {
-            get { return _email; }
-            set { _email = value; }
-        }
+        public string Email { get; set; }
 
-        public DateTime? Birthdate
-        {
-            get { return _birthdate; }
-            set { _birthdate = value; }
-        }
+        public DateTime? Birthdate { get; set; }
 
-        public int Age { get { return DateTime.Today.Month < Birthdate.Value.Month || (DateTime.Today.Month == Birthdate.Value.Month &&
-            DateTime.Today.Day < Birthdate.Value.Day) ? DateTime.Today.Year - Birthdate.Value.Year - 1 : DateTime.Today.Year - Birthdate.Value.Year; } }
-        public string SunSign { get { return FindSunSign(Birthdate.Value.Day, Birthdate.Value.Month); } }
-        public string ChineseSign { get { return FindChineseSign(_birthdate.Value.Year); } }
-        public bool IsAduld { get { return Age >= 18; } }
-
-        public bool IsBirthday
-        { 
-            get 
-            {
-                return (DateTime.Today.Month == Birthdate.Value.Month) && (DateTime.Today.Day == Birthdate.Value.Day);
-            }
-        }
+        public int Age =>
+            DateTime.Today.Month < Birthdate.Value.Month || (DateTime.Today.Month == Birthdate.Value.Month &&
+                                                             DateTime.Today.Day < Birthdate.Value.Day) ? DateTime.Today.Year - Birthdate.Value.Year - 1 : DateTime.Today.Year - Birthdate.Value.Year;
+        public string SunSign => FindSunSign(Birthdate.Value.Day, Birthdate.Value.Month);
+        public string ChineseSign => FindChineseSign(Birthdate.Value.Year);
+        public bool IsAdult => Age >= 18;
+        public bool IsBirthday => (DateTime.Today.Month == Birthdate.Value.Month) && (DateTime.Today.Day == Birthdate.Value.Day);
 
         #endregion
 
@@ -115,9 +83,9 @@ namespace ProgrammingInCSharp.Lab02.Models
 
         private string FindChineseSign(int year)
         {
-            int ei = (int)Math.Floor((year - 4.0) % 10 / 2);
-            int ai = (year - 4) % 12;
-            return $"{elements[ei]} {animals[ai]}";
+            var ei = (int)Math.Floor((year - 4.0) % 10 / 2);
+            var ai = (year - 4) % 12;
+            return $"{_elements[ei]} {_animals[ai]}";
         }
 
     }

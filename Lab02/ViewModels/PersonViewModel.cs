@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using ProgrammingInCSharp.Lab02.Models;
 using ProgrammingInCSharp.Lab02.Tools;
 
@@ -13,89 +12,55 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
     class PersonViewModel : INotifyPropertyChanged
     {
         #region Fields
-        private int _age;
-        private bool _isAdult;
+
         private string _sunSign;
         private string _chineseSign;
-        private bool _isBirthday;
+        private string _birthdate;
         private bool _isEnabled = true;
-        #endregion
-        private Person _person = new();
+        private Person _person;
 
+        #endregion
+        
         #region Commands
+
         private RelayCommand<object> _calculateCommand;
-
         public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
 
+        #endregion
 
         #region Properties
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+        public DateTime? Birthdate { get; set; }
 
-        public string Name
+        public string StringBirthdate
         {
-            get
-            {
-                return _person.Name;
-            }
+            get => _birthdate;
             set
             {
-                _person.Name = value;
-            }
-        }
-
-        public string Surname
-        {
-            get
-            {
-                return _person.Surname;
-            }
-            set
-            {
-                _person.Surname = value;
-            }
-        }
-        public string Email
-        {
-            get
-            {
-                return _person.Email;
-            }
-            set
-            {
-                _person.Email = value;
-            }
-        }
-        public DateTime? Birthdate
-        {
-            get
-            {
-                return _person.Birthdate;
-            }
-            set
-            {
-                _person.Birthdate = value;
+                _birthdate = Birthdate.Value.ToShortDateString();
+                OnPropertyChanged("StringBirthdate");
             }
         }
 
-        public bool IsAdult
+        public string IsAdult
         {
             get
             {
-                return _isAdult;
+                if (_person == null)
+                    return "";
+                if (_person.IsAdult)
+                    return "TRUE";
+                
+                return "FALSE";
             }
-            private set
-            {
-                _isAdult = value;
-                OnPropertyChanged("IsAdult");
-            }
+            private set => OnPropertyChanged("IsAdult");
         }
 
         public string SunSign
         {
-            get
-            {
-                return _sunSign;
-            }
+            get => _sunSign;
             private set
             {
                 _sunSign = value;
@@ -105,10 +70,7 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
 
         public string ChineseSign
         {
-            get
-            {
-                return _chineseSign;
-            }
+            get => _chineseSign;
             private set
             {
                 _chineseSign = value;
@@ -116,20 +78,19 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
             }
         }
 
-        public bool IsBirthday
+        public string IsBirthday
         {
             get
             {
-                return _isBirthday;
+                if (_person == null)
+                    return "";
+
+                return _person.IsBirthday ? "TRUE" : "FALSE";
             }
-            private set
-            {
-                _isBirthday = value;
-                OnPropertyChanged("IsBirthday");
-            }
+            private set => OnPropertyChanged("IsBirthday");
         }
 
-
+        #endregion
 
         public RelayCommand<object> ProceedCommand
         {
@@ -151,16 +112,14 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
         {
             _person = new Person(Name, Surname, Email, Birthdate);
 
-            if (_person.Age < 0)
+            switch (_person.Age)
             {
-                MessageBox.Show($"Wrong birthdate!\n -- You haven't been born yet --");
-                return;
-            }
-
-            if (_person.Age > 135)
-            {
-                MessageBox.Show($"Wrong birthdate!\n -- You are probably dead -- \n must be less than 135");
-                return;
+                case < 0:
+                    MessageBox.Show($"Wrong birthdate!\n -- You haven't been born yet --");
+                    return;
+                case > 135:
+                    MessageBox.Show($"Wrong birthdate!\n -- You are probably dead -- \n must be less than 135");
+                    return;
             }
 
             IsEnabled = false;
@@ -170,25 +129,25 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
 
         private void Calculate()
         {
-            IsAdult = _person.IsAduld;
+            //Thread.Sleep(3000);
+            IsAdult = _person.IsAdult.ToString();
             SunSign = _person.SunSign;
             ChineseSign = _person.ChineseSign;
-            OnPropertyChanged("Name");
-            OnPropertyChanged("Surname");
-            OnPropertyChanged("Email");
-            OnPropertyChanged("Birthdate");
-            if (IsBirthday = _person.IsBirthday)
-            {
+            IsBirthday = _person.IsBirthday.ToString();
+            StringBirthdate = "";
+
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Surname));
+            OnPropertyChanged(nameof(Email));
+
+            if (_person.IsBirthday)
                 MessageBox.Show($"Happy birthday!!!");
-            }
+
         }
 
         public bool IsEnabled
         {
-            get
-            {
-                return _isEnabled;
-            }
+            get => _isEnabled;
 
             set
             {
@@ -197,8 +156,6 @@ namespace ProgrammingInCSharp.Lab02.ViewModels
             }
 
         }
-
-        #endregion
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
