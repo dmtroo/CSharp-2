@@ -12,7 +12,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Name="DpCaption" Grid.Column="0" Text ="Caption" FontSize="12" HorizontalAlignment="Left" Foreground="Black" Margin="10,9,5,2" />
+        <TextBlock Name="DpCaption" Grid.Column="0" Text ="Caption" FontSize="12" HorizontalAlignment="Left" Width="50" Foreground="Black" Margin="6,9,5,2" />
         <DatePicker Name="DpDate" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="25"  Margin="10,5,10,0" SelectedDate="{Binding ElementName=datePickerWithCaption, Path=SelectedDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>

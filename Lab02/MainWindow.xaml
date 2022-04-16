@@ -7,7 +7,7 @@
         xmlns:lab01="clr-namespace:ProgrammingInCSharp.Lab02"
         xmlns:dateWindow="clr-namespace:ProgrammingInCSharp.Lab02.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="400" MinHeight="240" MinWidth="400">
+        Title="MainWindow" Height="590" Width="400" MinHeight="580" MinWidth="400">
     <Grid>
         <dateWindow:DatePickerView></dateWindow:DatePickerView>
     </Grid>

@@ -8,11 +8,10 @@ namespace ProgrammingInCSharp.Lab02.Views
     /// </summary>
     public partial class DatePickerView : UserControl
     {
-        private DatePickerViewModel _viewModel;
         public DatePickerView()
         {
             InitializeComponent();
-            DataContext = _viewModel = new DatePickerViewModel();
+            DataContext = new PersonViewModel();
         }
     }
 }
