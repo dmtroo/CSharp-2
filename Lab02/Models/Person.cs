@@ -6,8 +6,8 @@ namespace ProgrammingInCSharp.Lab02.Models
     {
         #region Fields
 
-        private readonly string[] _animals = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
-        private readonly string[] _elements = { "Wood", "Fire", "Earth", "Metal", "Water" };
+        private static readonly string[] Animals = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
+        private static readonly string[] Elements = { "Wood", "Fire", "Earth", "Metal", "Water" };
 
         #endregion
 
@@ -84,7 +84,7 @@ namespace ProgrammingInCSharp.Lab02.Models
         {
             var ei = (int)Math.Floor((year - 4.0) % 10 / 2);
             var ai = (year - 4) % 12;
-            return $"{_elements[ei]} {_animals[ai]}";
+            return $"{Elements[ei]} {Animals[ai]}";
         }
     }
 }
