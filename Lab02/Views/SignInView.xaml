@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ProgrammingInCSharp.Lab02.Views.SignInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tools="clr-namespace:ProgrammingInCSharp.Lab02.Tools.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400" IsEnabled="{Binding IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <tools:TextBoxWithCaption x:Name="TBoxName" Grid.Row="0" Grid.Column="0" Caption="Name:" Margin="2" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
+        <tools:TextBoxWithCaption x:Name="TBoxSurname" Grid.Row="1" Grid.Column="0" Caption="Surname:" Margin="2" Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
+        <tools:TextBoxWithCaption x:Name="TBoxEmail" Grid.Row="2" Grid.Column="0" Caption="Email:" Margin="2" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></tools:TextBoxWithCaption>
+        <tools:DatePickerWithCaption x:Name="DpWithCp" Grid.Column="0" Grid.Row="3" Caption="Birthdate:" SelectedDate="{Binding Birthdate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></tools:DatePickerWithCaption>
+        <Button Name="Proceed" Grid.Column="0" Grid.Row ="4" Margin="25, 15, 25,5" Height="25" HorizontalAlignment="Stretch" VerticalAlignment="Center" Content="Proceed" Command="{Binding ProceedCommand}"></Button>
+    </Grid>
+</UserControl>

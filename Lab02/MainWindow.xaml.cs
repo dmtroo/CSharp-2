@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using ProgrammingInCSharp.Lab02.Views;
 
 namespace ProgrammingInCSharp.Lab02
@@ -12,7 +11,7 @@ namespace ProgrammingInCSharp.Lab02
         public MainWindow()
         {
             InitializeComponent();
-            Content = new DatePickerView();
+            Content = new AuthView();
         }
 
 

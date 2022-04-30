@@ -4,14 +4,14 @@ using ProgrammingInCSharp.Lab02.ViewModels;
 namespace ProgrammingInCSharp.Lab02.Views
 {
     /// <summary>
-    /// Interaction logic for DatePickerView.xaml
+    /// Interaction logic for AuthView.xaml
     /// </summary>
-    public partial class DatePickerView : UserControl
+    public partial class AuthView : UserControl
     {
-        public DatePickerView()
+        public AuthView()
         {
             InitializeComponent();
-            DataContext = new PersonViewModel();
+            DataContext = new AuthViewModel();
         }
     }
 }

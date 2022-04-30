@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-
 namespace ProgrammingInCSharp.Lab02.Tools.Controls
 {
     /// <summary>

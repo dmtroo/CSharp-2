@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lab02"
-        xmlns:lab01="clr-namespace:ProgrammingInCSharp.Lab02"
         xmlns:dateWindow="clr-namespace:ProgrammingInCSharp.Lab02.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="590" Width="400" MinHeight="580" MinWidth="400">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="Info program" SizeToContent="WidthAndHeight" MinHeight="225"  MinWidth="400">
     <Grid>
-        <dateWindow:DatePickerView></dateWindow:DatePickerView>
+        <dateWindow:AuthView></dateWindow:AuthView>
     </Grid>
 </Window>

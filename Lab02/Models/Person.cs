@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.RegularExpressions;
+using ProgrammingInCSharp.Lab02.Exceptions;
 
 namespace ProgrammingInCSharp.Lab02.Models
 {
@@ -15,14 +17,14 @@ namespace ProgrammingInCSharp.Lab02.Models
 
         public Person(string name, string surname, string email, DateTime? birthdate): this(name, surname, email)
         {
-            Birthdate = birthdate;
+            Birthdate = ValidateBirthdate(birthdate);
         }
 
         public Person(string name, string surname, string email)
         {
             Name = name;
             Surname = surname;
-            Email = email;
+            Email = ValidateEmail(email);
         }
 
         public Person(string name, string surname, DateTime? birthdate): this(name, surname, "new_email@gmail.com", birthdate) {}
@@ -32,16 +34,11 @@ namespace ProgrammingInCSharp.Lab02.Models
         #region Properties
 
         public string Name { get; set; }
-
         public string Surname { get; set; }
-
         public string Email { get; set; }
-
         public DateTime? Birthdate { get; set; }
+        public int Age { get; set; }
 
-        public int Age =>
-            DateTime.Today.Month < Birthdate.Value.Month || (DateTime.Today.Month == Birthdate.Value.Month &&
-                                                             DateTime.Today.Day < Birthdate.Value.Day) ? DateTime.Today.Year - Birthdate.Value.Year - 1 : DateTime.Today.Year - Birthdate.Value.Year;
         public string SunSign => FindSunSign(Birthdate.Value.Day, Birthdate.Value.Month);
         public string ChineseSign => FindChineseSign(Birthdate.Value.Year);
         public bool IsAdult => Age >= 18;
@@ -85,6 +82,28 @@ namespace ProgrammingInCSharp.Lab02.Models
             var ei = (int)Math.Floor((year - 4.0) % 10 / 2);
             var ai = (year - 4) % 12;
             return $"{Elements[ei]} {Animals[ai]}";
+        }
+
+        public string ValidateEmail(string email)
+        {
+            Regex validator = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return validator.IsMatch(email) ? email : throw new InvalidEmailException("You've entered invalid email");
+        }
+
+        public DateTime? ValidateBirthdate(DateTime? birthdate)
+        {
+            Age = DateTime.Today.Month < birthdate.Value.Month || (DateTime.Today.Month == birthdate.Value.Month &&
+                                                                   DateTime.Today.Day < birthdate.Value.Day) ? DateTime.Today.Year - birthdate.Value.Year - 1 : DateTime.Today.Year - birthdate.Value.Year;
+
+            switch (Age)
+            {
+                case < 0:
+                    throw new FutureBirthdateException("You haven't born yet -- \n!Age must be higher than 0!");
+                case > 135:
+                    throw new PastBirthdateException("You are probably dead -- \n!Age must be less than 135!");
+            }
+
+            return birthdate;
         }
     }
 }
